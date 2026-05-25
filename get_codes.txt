@@ -1,0 +1,38 @@
+Question -4
+
+class Payment{
+    public:
+    virtual void paymentProcess(double amount) = 0;
+
+    void printReceipt(double amount){
+        cout<< "Receipt generated."<<endl;
+        cout<< "You have paid "<< amount<< endl;
+    }
+};
+class CreditCardPayment : public Payment{
+    public:
+    void paymentProcess(double amount)override{
+        if(amount >  0){
+            printReceipt(amount);
+        }
+    }
+};
+class UPIPayment : public Payment{
+    public:
+    void paymentProcess(double amount)override{
+        if(amount > 0){
+            printReceipt(amount);
+        }
+    }
+};
+
+int main(){
+    CreditCardPayment card;
+    UPIPayment upi;
+
+    card.paymentProcess(2000);
+    upi.paymentProcess(4000);
+
+    return 0;
+
+Question 5
