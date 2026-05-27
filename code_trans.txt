@@ -70,3 +70,53 @@ int main(){
 }
 
 Question - 3
+
+#include <iostream>
+#include <vector>   
+#include <string>
+using namespace std;
+
+class PaymentMethod{
+    public:
+    virtual void  pay(double amount){
+        cout<< "Processing generic payment of Rs: " << amount<< endl;
+    }
+};
+class CreditCard : public PaymentMethod{
+    public:
+
+    void pay(double amount)override{
+        cout<< "Receict generated. \n"<<"Card No. XXXX5464 \n"<< "Convenience Fee 2%: " << amount * 0.02 << "\n" << "Total Amount: "<< amount + (amount * 0.02)<< endl;
+    }
+};
+class UPI : public PaymentMethod{
+    public: 
+    void pay(double amount)override{
+        cout<< "Receict generated. \n"<<"UPI ID: abc@ybl "<< "\n" << "Total Amount: "<< amount << endl;
+    }
+};
+class NetBanking : public PaymentMethod{
+    public:
+    void pay(double amount)override{
+        cout<< "Receict generated. \n"<<"Net Banking: abc@ybl "<< "\n" << "Total Amount: "<< amount << endl;
+    }
+};
+
+int main(){
+
+    vector<PaymentMethod*> obj;
+
+    obj.push_back(new CreditCard());
+    obj.push_back(new UPI()); 
+    obj.push_back(new NetBanking());
+
+    double userInput = 0;
+    for(const auto &a: obj){
+        cout<< "Please enter amount: ";
+        cin>> userInput;
+        a->pay(userInput);
+    }
+    delete a;
+    
+    return 0;
+}
